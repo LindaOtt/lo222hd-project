@@ -1,0 +1,28 @@
+body {
+    background: url("../images/bg.jpg");
+    font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+    color: #ffffff;
+}
+
+section {
+    width: 800px;
+    margin: 0 auto;
+}
+
+
+#container {
+    width: 400px;
+    margin: 0;
+}
+
+canvas {
+    width: inherit;
+    height: 100%;
+    border: 5px solid black;
+}
+
+
+
+h1 {
+    font-family: 'Homemade Apple', cursive;
+}

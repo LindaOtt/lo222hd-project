@@ -1,0 +1,97 @@
+﻿<html>
+<head>
+    <title>Coffee Cup Maker</title>
+    <link href='http://fonts.googleapis.com/css?family=Homemade+Apple' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+
+<section>
+    <h1>Coffee Cup Maker</h1>
+    <div id="container"></div>
+</section>
+<script src="js/three.min.js"></script>
+<script src="js/ColladaLoader.js"></script>
+<script src="js/TrackballControls.js"></script>
+
+<script src="js/Detector.js"></script>
+<script>
+    var scene, camera, controls, renderer, light;
+    var scenewidth, sceneheight;
+    init();
+    animate();
+    render();
+
+    function init() {
+        scenewidth = 500;
+        sceneheight = 600;
+        camera = new THREE.PerspectiveCamera(45, scenewidth/sceneheight, 0.1, 1000 );
+        camera.position.x = 4;
+        camera.position.y = 4;
+        camera.position.z = 1;
+
+
+        controls = new THREE.TrackballControls( camera );
+
+        controls.rotateSpeed = 5.0;
+        controls.zoomSpeed = 1.2;
+        controls.panSpeed = 1.2;
+        controls.noZoom = true;
+        controls.noPan = false;
+        controls.staticMoving = true;
+        controls.dynamicDampingFactor = 0;
+        controls.keys = [ 65, 83, 68 ];
+        controls.addEventListener( 'change', render );
+
+        scene = new THREE.Scene();
+
+        hemisphereLight = new THREE.HemisphereLight( "rgb(172,223,250)", "rgb(141,135,131)", 0.5 );
+        scene.add( hemisphereLight );
+
+        renderer = new THREE.WebGLRenderer();
+
+        renderer.setSize( scenewidth, sceneheight );
+
+        renderer.setClearColor(0xf5f5dc);
+
+        container = document.getElementById( 'container' );
+        container.appendChild( renderer.domElement );
+
+
+        // instantiate a loader
+        var loader = new THREE.ColladaLoader();
+
+        loader.options.convertUpAxis = true;
+        loader.options.upAxis = "X";
+        loader.centerGeometry = true;
+
+        loader.load(
+                // resource URL
+                'models/kopp.dae',
+                // Function when resource is loaded
+                function ( collada ) {
+                    scene.add( collada.scene );
+                },
+                // Function called when download progresses
+                function ( xhr ) {
+                    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+                }
+        );
+
+        renderer.render(scene, camera);
+    }
+
+    function animate() {
+        requestAnimationFrame( animate );
+        controls.update();
+        renderer.render(scene, camera);
+    }
+
+    function render() {
+        renderer.render(scene, camera);
+    }
+
+</script>
+
+</body>
+</html>
