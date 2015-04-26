@@ -9,6 +9,14 @@
 <section>
     <h1>Coffee Cup Maker</h1>
     <div id="container"></div>
+    <div id="buttons">
+        <p><a href="#"><img id="gsbas" src="images/gs-bas.jpg"></a></p>
+        <p>
+            <a href="#"><img id="gsbasform1" class="hidden" src="images/gs-bas-form1.jpg"></a>
+            <a href="#"><img id="gsbasform2" class="hidden" src="images/gs-bas-form2.jpg"></a>
+            <a href="#"><img id="gsbasform3" class="hidden" src="images/gs-bas-form3.jpg"></a>
+        </p>
+    </div>
 </section>
 <script src="js/three.min.js"></script>
 <script src="js/ColladaLoader.js"></script>
@@ -18,9 +26,48 @@
 <script>
     var scene, camera, controls, renderer, light;
     var scenewidth, sceneheight;
+    var model;
+    var colladascene;
+    model = 'models/cupbase2.dae';
+
+    // instantiate a loader
+    var loader = new THREE.ColladaLoader();
+
+    loader.options.convertUpAxis = true;
+    loader.options.upAxis = "X";
+    loader.centerGeometry = true;
+
+    loader.load(
+            model,
+            // When model is loaded, call function
+            function ( collada ) {
+                //colladascene = collada.scene;
+                scene.add( collada.scene );
+            },
+            // Function called when download progresses
+            function ( xhr ) {
+                console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+            }
+    );
     init();
+
     animate();
     render();
+
+    var buttons = document.querySelector("#buttons");
+    //btn.addEventListener("click", init('models/cupbase1.dae'));
+    buttons.addEventListener("click", function(e) {
+        e = e || event;
+        if (e.target.id === "gsbas") {
+            document.getElementById("gsbasform1").className = "shown";
+            document.getElementById("gsbasform2").className = "shown";
+            document.getElementById("gsbasform3").className = "shown";
+        }
+        else if(e.target.id === "gsbasform1") {
+            removeScene();
+            addScene(cupbase3);
+        }
+    });
 
     function init() {
         scenewidth = 500;
@@ -41,7 +88,7 @@
         controls.staticMoving = true;
         controls.dynamicDampingFactor = 0;
         controls.keys = [ 65, 83, 68 ];
-        controls.addEventListener( 'change', render );
+        //controls.addEventListener( "change", render );
 
         scene = new THREE.Scene();
 
@@ -58,27 +105,38 @@
         container.appendChild( renderer.domElement );
 
 
-        // instantiate a loader
-        var loader = new THREE.ColladaLoader();
 
-        loader.options.convertUpAxis = true;
-        loader.options.upAxis = "X";
-        loader.centerGeometry = true;
 
-        loader.load(
-                // resource URL
-                'models/kopp.dae',
-                // Function when resource is loaded
-                function ( collada ) {
-                    scene.add( collada.scene );
-                },
-                // Function called when download progresses
-                function ( xhr ) {
-                    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-                }
-        );
+        render();
+    }
 
-        renderer.render(scene, camera);
+    function loadScene() {
+
+    }
+
+    function removeScene() {
+        //alert(window.refmodel.name);
+
+        alert("Scene length: " + scene.children[1].children.length);
+        console.log(scene.children[1].children);
+        /*
+        for (var i = 0; i<scene.children[1].children.length; i++) {
+            console.log("Child " + scene.children[1].children[i].name);
+        }
+        */
+        console.log("Child " + scene.children[1].children[4].name);
+        //scene.remove(scene.children[1].children[4].name);
+        //scene.remove(scene.children[1].name);
+        //alert("Scene child 2: " + scene.children[4].name);
+        var i, sceneObj;
+        for (i=scene.children.length-1; i>= 0; i--) {
+            sceneObj=scene.children[i];
+            if ( sceneObj !== camera) {
+                scene.remove(obj);
+            }
+        }
+        animate();
+        render();
     }
 
     function animate() {
@@ -90,6 +148,8 @@
     function render() {
         renderer.render(scene, camera);
     }
+
+
 
 </script>
 

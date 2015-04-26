@@ -5,14 +5,31 @@ body {
 }
 
 section {
-    width: 800px;
+    width: 1200px;
     margin: 0 auto;
 }
 
+.hidden {
+    display: none;
+}
+
+.shown {
+    display: inline-block;
+}
 
 #container {
-    width: 400px;
+    width: 520px;
     margin: 0;
+    border: 1px solid white;
+    clear: none;
+    display: inline-block;
+}
+
+#buttons {
+    width: 400px;
+    display: inline-block;
+    border: 1px solid white;
+    vertical-align: top;
 }
 
 canvas {
