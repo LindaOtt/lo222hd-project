@@ -20,7 +20,6 @@ section {
 #container {
     width: 520px;
     margin: 0;
-    border: 1px solid white;
     clear: none;
     display: inline-block;
 }
@@ -28,8 +27,45 @@ section {
 #buttons {
     width: 400px;
     display: inline-block;
-    border: 1px solid white;
     vertical-align: top;
+    position: relative;
+}
+
+#gsbas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#gsbasform1 {
+    position: absolute;
+    top: 104px;
+    left: 0;
+}
+
+#gsbasform2 {
+    position: absolute;
+    top: 104px;
+    left: 104px;
+}
+
+#gsbasform3 {
+    position: absolute;
+    left: 208px;
+    top: 104px;
+}
+
+
+#gsformett {
+    position: absolute;
+    top: 0;
+    left: 104px;
+}
+
+#gsformtva {
+    position: absolute;
+    top: 0;
+    left: 208px;
 }
 
 canvas {
@@ -37,8 +73,6 @@ canvas {
     height: 100%;
     border: 5px solid black;
 }
-
-
 
 h1 {
     font-family: 'Homemade Apple', cursive;

@@ -16,6 +16,8 @@
             <a href="#"><img id="gsbasform2" class="hidden" src="images/gs-bas-form2.jpg"></a>
             <a href="#"><img id="gsbasform3" class="hidden" src="images/gs-bas-form3.jpg"></a>
         </p>
+        <p><a href="#"><img id="gsformett" src="images/gs-formett.jpg"></a></p>
+        <p><a href="#"><img id="gsformtva" src="images/gs-formtva.jpg"></a></p>
     </div>
 </section>
 <script src="js/three.min.js"></script>
@@ -24,11 +26,12 @@
 
 <script src="js/Detector.js"></script>
 <script>
+    
     var scene, camera, controls, renderer, light;
     var scenewidth, sceneheight;
     var model;
     var colladascene;
-    model = 'models/cupbase2.dae';
+    model = 'models/cupbase1.dae';
 
     // instantiate a loader
     var loader = new THREE.ColladaLoader();
@@ -37,6 +40,7 @@
     loader.options.upAxis = "X";
     loader.centerGeometry = true;
 
+        /*
     loader.load(
             model,
             // When model is loaded, call function
@@ -49,6 +53,8 @@
                 console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
             }
     );
+    */
+
     init();
 
     animate();
@@ -65,7 +71,19 @@
         }
         else if(e.target.id === "gsbasform1") {
             removeScene();
-            addScene(cupbase3);
+            loadScene('cupbase1');
+        }
+        else if(e.target.id === "gsbasform2") {
+            removeScene();
+            loadScene('cupbase2');
+        }
+        else if(e.target.id === "gsbasform3") {
+            removeScene();
+            loadScene('cupbase3');
+        }
+        else if(e.target.id === "gsformett") {
+            //removeScene();
+            loadScene('form1shark');
         }
     });
 
@@ -77,7 +95,6 @@
         camera.position.y = 4;
         camera.position.z = 1;
 
-
         controls = new THREE.TrackballControls( camera );
 
         controls.rotateSpeed = 5.0;
@@ -88,51 +105,56 @@
         controls.staticMoving = true;
         controls.dynamicDampingFactor = 0;
         controls.keys = [ 65, 83, 68 ];
-        //controls.addEventListener( "change", render );
 
         scene = new THREE.Scene();
 
-        hemisphereLight = new THREE.HemisphereLight( "rgb(172,223,250)", "rgb(141,135,131)", 0.5 );
-        scene.add( hemisphereLight );
-
         renderer = new THREE.WebGLRenderer();
-
         renderer.setSize( scenewidth, sceneheight );
-
         renderer.setClearColor(0xf5f5dc);
 
         container = document.getElementById( 'container' );
         container.appendChild( renderer.domElement );
-
-
-
-
+        loadScene('cupbase1');
         render();
     }
 
-    function loadScene() {
-
+    function loadScene(model) {
+        model='models/'+model+'.dae';
+        console.log("Model: " + model);
+        loader.load(
+                model,
+                // When model is loaded, call function
+                function ( collada ) {
+                    //colladascene = collada.scene;
+                    scene.add( collada.scene );
+                    hemisphereLight = new THREE.HemisphereLight( "rgb(172,223,250)", "rgb(141,135,131)", 0.5 );
+                    scene.add( hemisphereLight );
+                },
+                // Function called when download progresses
+                function ( xhr ) {
+                    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+                }
+        );
     }
 
     function removeScene() {
         //alert(window.refmodel.name);
 
-        alert("Scene length: " + scene.children[1].children.length);
-        console.log(scene.children[1].children);
+        //alert("Scene length: " + scene.children[1].children.length);
+        //console.log(scene.children[1].children);
         /*
         for (var i = 0; i<scene.children[1].children.length; i++) {
             console.log("Child " + scene.children[1].children[i].name);
         }
         */
-        console.log("Child " + scene.children[1].children[4].name);
         //scene.remove(scene.children[1].children[4].name);
         //scene.remove(scene.children[1].name);
         //alert("Scene child 2: " + scene.children[4].name);
         var i, sceneObj;
         for (i=scene.children.length-1; i>= 0; i--) {
             sceneObj=scene.children[i];
-            if ( sceneObj !== camera) {
-                scene.remove(obj);
+            if ( sceneObj !== camera && sceneObj !== light) {
+                scene.remove(sceneObj);
             }
         }
         animate();
