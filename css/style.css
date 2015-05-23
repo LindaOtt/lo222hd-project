@@ -1,5 +1,5 @@
 body {
-    background: url("../images/bg.jpg");
+    /*background: url("../images/bg.jpg");*/
     font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
     color: #ffffff;
 }
@@ -71,9 +71,17 @@ section {
 canvas {
     width: inherit;
     height: 100%;
-    border: 5px solid black;
 }
 
 h1 {
     font-family: 'Homemade Apple', cursive;
+}
+
+
+/* Mobile */
+@media only screen and (max-width: 480px) {
+    body {
+        background: url("../images/bg-mobil.png");
+        background-repeat: no-repeat;
+    }
 }

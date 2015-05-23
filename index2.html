@@ -29,12 +29,9 @@
 
     var scene, camera, controls, renderer, light;
     var scenewidth, sceneheight;
-    //var model;
+    var model;
     var colladascene;
-    var base='cupbase1';
-    var form1, form2;
-
-    //model = 'models/cupbase1.dae';
+    model = 'models/cupbase1.dae';
 
     // instantiate a loader
     var loader = new THREE.ColladaLoader();
@@ -58,45 +55,25 @@
             document.getElementById("gsbasform3").className = "shown";
         }
         else if(e.target.id === "gsbasform1") {
-            //Checking to see if base is already loaded
-            if (base != 'cupbase1') {
-                removeScene(base);
-                loadScene('cupbase1');
-                base = 'cupbase1';
-            }
+            removeScene();
+            loadScene('cupbase1');
         }
         else if(e.target.id === "gsbasform2") {
-            if (base != 'cupbase2') {
-                removeScene(base);
-                loadScene('cupbase2');
-                base = 'cupbase2';
-            }
+            removeScene();
+            loadScene('cupbase2');
         }
         else if(e.target.id === "gsbasform3") {
-            if (base != 'cupbase3') {
-                removeScene(base);
-                loadScene('cupbase3');
-                base = 'cupbase3';
-            }
+            removeScene();
+            loadScene('cupbase3');
         }
         else if(e.target.id === "gsformett") {
-            if (form1 != 'form1shark') {
-                removeScene(form1);
-                loadScene('form1shark');
-                form1 = 'form1shark';
-            }
-        }
-        else if(e.target.id === "gsformtva") {
-            if (form2 != 'form2shark') {
-                removeScene(form2);
-                loadScene('form2shark');
-                form2 = 'form2shark';
-            }
+            //removeScene();
+            loadScene('form1shark');
         }
     });
 
     function init() {
-        scenewidth = 400;
+        scenewidth = 500;
         sceneheight = 600;
         camera = new THREE.PerspectiveCamera(45, scenewidth/sceneheight, 0.1, 1000 );
         camera.position.x = 4;
@@ -116,16 +93,9 @@
 
         scene = new THREE.Scene();
 
-        /*var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-        directionalLight.position.set( 2, 2, 0 );
-        scene.add( directionalLight );*/
-
-        hemisphereLight = new THREE.HemisphereLight( "rgb(255,255,255)", "rgb(0,0,0)", 1 );
-        scene.add( hemisphereLight );
-        
-        renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer = new THREE.WebGLRenderer();
         renderer.setSize( scenewidth, sceneheight );
-        renderer.setClearColor( 0x000000, 0 );
+        renderer.setClearColor(0xf5f5dc);
 
         container = document.getElementById( 'container' );
         container.appendChild( renderer.domElement );
@@ -134,16 +104,16 @@
     }
 
     function loadScene(model) {
-        modeldae='models/'+model+'.dae';
+        model='models/'+model+'.dae';
+        console.log("Model: " + model);
         loader.load(
-                modeldae,
+                model,
                 // When model is loaded, call function
                 function ( collada ) {
-                    modelscene = collada.scene;
-                    modelscene.name = model;
-                    //modelscene.children[0].material = new THREE.MeshPhongMaterial({map:THREE.ImageUtils.loadTexture('textures/texporcelain.jpg')});
-                    scene.add( modelscene );
-
+                    //colladascene = collada.scene;
+                    scene.add( collada.scene );
+                    hemisphereLight = new THREE.HemisphereLight( "rgb(172,223,250)", "rgb(141,135,131)", 0.5 );
+                    scene.add( hemisphereLight );
                 },
                 // Function called when download progresses
                 function ( xhr ) {
@@ -152,19 +122,26 @@
         );
     }
 
-    function removeScene(model) {
+    function removeScene() {
+        //alert(window.refmodel.name);
 
+        //alert("Scene length: " + scene.children[1].children.length);
+        //console.log(scene.children[1].children);
+        /*
+        for (var i = 0; i<scene.children[1].children.length; i++) {
+            console.log("Child " + scene.children[1].children[i].name);
+        }
+        */
+        //scene.remove(scene.children[1].children[4].name);
+        //scene.remove(scene.children[1].name);
+        //alert("Scene child 2: " + scene.children[4].name);
         var i, sceneObj;
         for (i=scene.children.length-1; i>= 0; i--) {
             sceneObj=scene.children[i];
-            console.log("SceneObj name: " + scene.children[i].name);
-            if(scene.children[i].name == model) {
-                scene.remove(scene.children[i]);
+            if ( sceneObj !== camera && sceneObj !== light) {
+                scene.remove(sceneObj);
             }
         }
-
-        console.log("Model to remove: " + model);
-
         animate();
         render();
     }
