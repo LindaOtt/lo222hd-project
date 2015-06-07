@@ -1,12 +1,22 @@
 body {
-    background: url("../images/bg.jpg");
+    /*background: url("../images/bg.jpg");*/
     font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
     color: #ffffff;
 }
 
+ul, li {
+    list-style-type: none;
+}
+
 section {
-    width: 1200px;
-    margin: 0 auto;
+    width: 1013px;
+    height: 1088px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: auto;
+    background: url("../images/bg-desktop.png");
+    background-repeat: no-repeat;
 }
 
 .hidden {
@@ -17,7 +27,18 @@ section {
     display: inline-block;
 }
 
+.highopacity {
+    opacity: 1;
+}
+
+.lowopacity {
+    opacity: 0.3;
+}
+
 #container {
+    position: absolute;
+    top: 100px;
+    left: 230px;
     width: 520px;
     margin: 0;
     clear: none;
@@ -28,52 +49,151 @@ section {
     width: 400px;
     display: inline-block;
     vertical-align: top;
+    position: absolute;
+    right: 0
+}
+
+#baseforms {
+    display: inline-block;
+    padding-top: 5px;
+}
+
+.gs-main {
+    display: block;
     position: relative;
 }
 
-#gsbas {
+.gsform-level-1 {
     position: absolute;
     top: 0;
-    left: 0;
+    display: block;
 }
 
-#gsbasform1 {
+.gsform-level-2 {
     position: absolute;
-    top: 104px;
-    left: 0;
+    top: 120px;
+    display: block;
+    clear: both;
+    padding: 0;
+    width: 350px;
 }
 
-#gsbasform2 {
+.gsform-level-2 li {
+    display: inline-block;
+}
+
+.gsform-level-3 {
     position: absolute;
-    top: 104px;
-    left: 104px;
+    top: 120px;
+    display: block;
+    clear: both;
+    padding: 0;
+    width: 350px;
+    padding: 5px;
 }
 
-#gsbasform3 {
-    position: absolute;
-    left: 208px;
-    top: 104px;
+.gsform-level-3 li {
+    display: inline;
+    clear: none;
 }
 
-
-#gsformett {
+.gscolor-level-1 {
+    display: block;
     position: absolute;
     top: 0;
-    left: 104px;
+    left: 150px;
 }
 
-#gsformtva {
+.gsform-level-4 {
     position: absolute;
-    top: 0;
-    left: 208px;
+    top: 120px;
+    display: block;
+    clear: both;
+    padding: 0;
+    width: 350px;
+    padding: 5px;
+}
+
+
+.gsform-level-5 {
+    position: absolute;
+    top: 120px;
+    display: block;
+    clear: both;
+    padding: 0;
+    width: 350px;
+    padding: 5px;
+}
+
+.gsform-level-6 {
+    position: absolute;
+    top: 120px;
+    display: block;
+    clear: both;
+    padding: 0;
+    width: 350px;
+    padding: 5px;
+}
+
+.gsform-level-6 li {
+    display: inline;
+    clear: none;
 }
 
 canvas {
     width: inherit;
     height: 100%;
-    border: 5px solid black;
 }
 
 h1 {
     font-family: 'Homemade Apple', cursive;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+/* Mobile */
+@media only screen and (max-width: 480px) {
+    body {
+
+        background-color: #0b0b0b;
+    }
+
+    #container {
+        width: 320px;
+        margin: 0;
+        left:20px;
+        top: 200px;
+        clear: none;
+        display: inline-block;
+    }
+
+    section {
+        background: url("../images/bg-mobil.jpg");
+        background-repeat: no-repeat;
+        width: 100%;
+    }
+
+    #buttons {
+        width: 400px;
+        display: inline-block;
+        vertical-align: top;
+        position: absolute;
+        right: 0
+    }
+}
+
+/* iPad */
+@media only screen and (min-width : 481px) {
+
+    body {
+        background-color: #0b0b0b;
+    }
+
+    h1 {
+        font-size: 45px;
+        padding-left: 20px;
+    }
+
 }

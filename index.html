@@ -3,6 +3,7 @@
     <title>Coffee Cup Maker</title>
     <link href='http://fonts.googleapis.com/css?family=Homemade+Apple' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
@@ -10,14 +11,38 @@
     <h1>Coffee Cup Maker</h1>
     <div id="container"></div>
     <div id="buttons">
-        <p><a href="#"><img id="gsbas" src="images/gs-bas.jpg"></a></p>
-        <p>
-            <a href="#"><img id="gsbasform1" class="hidden" src="images/gs-bas-form1.jpg"></a>
-            <a href="#"><img id="gsbasform2" class="hidden" src="images/gs-bas-form2.jpg"></a>
-            <a href="#"><img id="gsbasform3" class="hidden" src="images/gs-bas-form3.jpg"></a>
-        </p>
-        <p><a href="#"><img id="gsformett" src="images/gs-formett.jpg"></a></p>
-        <p><a href="#"><img id="gsformtva" src="images/gs-formtva.jpg"></a></p>
+        <ul class="gs-main">
+            <li class="gsform-level-1"><a href="#"><img id="gsform" src="images/gs-form.png"></a>
+                <ul class="gsform-level-2">
+                    <li><a href="#"><img id="gsbas" class="hidden" src="images/gs-bas.png"></a>
+                        <ul class="gsform-level-3">
+                            <li><a href="#"><img id="gsbasform1" class="hidden" src="images/gs-bas-form1.png"></a></li>
+                            <li><a href="#"><img id="gsbasform2" class="hidden" src="images/gs-bas-form2.png"></a></li>
+                            <li><a href="#"><img id="gsbasform3" class="hidden" src="images/gs-bas-form3.png"></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img id="gsformett" class="hidden" src="images/gs-formett.png"></a>
+                        <ul class="gsform-level-4">
+                            <li><a href="#"><img id="gsformoneshark" class="hidden" src="images/gs-form1-shark.png"></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img id="gsformtva" class="hidden" src="images/gs-formtva.png"></a>
+                        <ul class="gsform-level-5">
+                            <li><a href="#"><img id="gsform2shark" class="hidden" src="images/gs-form2-shark.png"></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="gscolor-level-1"><a href="#"><img id="gscolor" src="images/gs-color.png"></a>
+                <ul class="gsform-level-6">
+                    <li><a href="#"><img id="gstexporcelain" class="hidden" src="images/gs-tex-porcelain.png"></a></li>
+                    <li><a href="#"><img id="gstexbasket" class="hidden" src="images/gs-tex-basket.png"></a></li>
+                    <li><a href="#"><img id="gstexwaves" class="hidden" src="images/gs-tex-waves.png"></a></li>
+
+                </ul>
+            </li>
+        </ul>
     </div>
 </section>
 <script src="js/three.min.js"></script>
@@ -26,12 +51,19 @@
 
 <script src="js/Detector.js"></script>
 <script>
-    
-    var scene, camera, controls, renderer, light;
+
+    var scene="empty";
+    var camera, controls, renderer, light;
     var scenewidth, sceneheight;
-    var model;
+    //var model;
     var colladascene;
-    model = 'models/cupbase1.dae';
+    var modelbase='cupbase1';
+    var form1='formoneshark';
+    var form2='form2shark';
+    var texture='textures/porcelain.jpg';
+    var defaulttexture='textures/porcelain.jpg';
+    var material;
+    //model = 'models/cupbase1.dae';
 
     // instantiate a loader
     var loader = new THREE.ColladaLoader();
@@ -40,60 +72,172 @@
     loader.options.upAxis = "X";
     loader.centerGeometry = true;
 
-        /*
-    loader.load(
-            model,
-            // When model is loaded, call function
-            function ( collada ) {
-                //colladascene = collada.scene;
-                scene.add( collada.scene );
-            },
-            // Function called when download progresses
-            function ( xhr ) {
-                console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-            }
-    );
-    */
 
-    init();
-
-    animate();
-    render();
 
     var buttons = document.querySelector("#buttons");
     //btn.addEventListener("click", init('models/cupbase1.dae'));
     buttons.addEventListener("click", function(e) {
         e = e || event;
+        if (e.target.id === "gsform") {
+            document.getElementById("gsbasform1").className = "hidden";
+            document.getElementById("gsbasform2").className = "hidden";
+            document.getElementById("gsbasform3").className = "hidden";
+            document.getElementById("gsbas").className = "shown";
+            document.getElementById("gsformett").className = "shown";
+            document.getElementById("gsformtva").className = "shown";
+            document.getElementById("gsformoneshark").className = "hidden";
+            document.getElementById("gsform2shark").className = "hidden";
+            document.getElementById("gscolor").className = "lowopacity";
+            document.getElementById("gstexporcelain").className = "hidden";
+            document.getElementById("gstexbasket").className = "hidden";
+            document.getElementById("gstexwaves").className = "hidden";
+        }
         if (e.target.id === "gsbas") {
             document.getElementById("gsbasform1").className = "shown";
             document.getElementById("gsbasform2").className = "shown";
             document.getElementById("gsbasform3").className = "shown";
+            document.getElementById("gsformoneshark").className = "hidden"
+            document.getElementById("gsformett").className = "lowopacity";
+            document.getElementById("gsformtva").className = "lowopacity";
+            document.getElementById("gstexporcelain").className = "hidden";
+            document.getElementById("gstexbasket").className = "hidden";
+            document.getElementById("gstexwaves").className = "hidden";
         }
         else if(e.target.id === "gsbasform1") {
-            removeScene();
-            loadScene('cupbase1');
+            document.getElementById("gsbasform1").className = "highopacity";
+            document.getElementById("gsbasform2").className = "lowopacity";
+            document.getElementById("gsbasform3").className = "lowopacity";
+            //Checking to see if base is already loaded
+            if (modelbase != 'cupbase1') {
+                removeScene(modelbase);
+                loadScene('cupbase1','base');
+                modelbase = 'cupbase1';
+                changematerial(scene,texture,'base');
+            }
         }
         else if(e.target.id === "gsbasform2") {
-            removeScene();
-            loadScene('cupbase2');
+            document.getElementById("gsbasform1").className = "lowopacity";
+            document.getElementById("gsbasform2").className = "highopacity";
+            document.getElementById("gsbasform3").className = "lowopacity";
+            if (modelbase != 'cupbase2','base') {
+                removeScene(modelbase);
+                loadScene('cupbase2');
+                modelbase = 'cupbase2';
+                changematerial(scene,texture,'base');
+                render();
+            }
         }
         else if(e.target.id === "gsbasform3") {
-            removeScene();
-            loadScene('cupbase3');
+            document.getElementById("gsbasform1").className = "lowopacity";
+            document.getElementById("gsbasform2").className = "lowopacity";
+            document.getElementById("gsbasform3").className = "highopacity";
+            if (modelbase != 'cupbase3') {
+                removeScene(modelbase);
+                loadScene('cupbase3','base');
+                modelbase = 'cupbase3';
+                changematerial(scene,texture,'base');
+                render();
+            }
         }
         else if(e.target.id === "gsformett") {
-            //removeScene();
-            loadScene('form1shark');
+            document.getElementById("gsformett").className = "highopacity";
+            document.getElementById("gsbas").className = "lowopacity";
+            document.getElementById("gsformtva").className = "lowopacity";
+            document.getElementById("gsform2shark").className = "hidden";
+            document.getElementById("gsbasform1").className = "hidden";
+            document.getElementById("gsbasform2").className = "hidden";
+            document.getElementById("gsbasform3").className = "hidden";
+            document.getElementById("gsformoneshark").className = "shown";
+        }
+        else if(e.target.id === "gsformoneshark") {
+            //if (form1 != 'formoneshark') {
+                //removeScene(form1);
+                console.log("formoneshark");
+                form1 = 'formoneshark';
+                loadScene('formoneshark','form1');
+
+                changematerial(scene,defaulttexture,'form1');
+                render();
+            //}
+        }
+        else if(e.target.id === "gsformtva") {
+            document.getElementById("gsform2shark").className = "shown";
+            document.getElementById("gsformoneshark").className = "hidden";
+            document.getElementById("gsbas").className = "lowopacity";
+            document.getElementById("gsformtva").className = "highopacity";
+            document.getElementById("gsformett").className = "lowopacity";
+            document.getElementById("gsbasform1").className = "hidden";
+            document.getElementById("gsbasform2").className = "hidden";
+            document.getElementById("gsbasform3").className = "hidden";
+        }
+        else if(e.target.id === "gsform2shark") {
+            //if (form2 != 'form2shark') {
+                //removeScene(form2);
+                loadScene('form2shark','form2');
+                form2 = 'form2shark';
+                changematerial(scene,defaulttexture,'form2');
+                render();
+            //}
+        }
+        else if(e.target.id === "gscolor") {
+            document.getElementById("gscolor").className = "highopacity";
+            document.getElementById("gsbas").className = "hidden";
+            document.getElementById("gsbasform1").className = "hidden";
+            document.getElementById("gsbasform2").className = "hidden";
+            document.getElementById("gsbasform3").className = "hidden";
+            document.getElementById("gsformett").className = "hidden";
+            document.getElementById("gsformtva").className = "hidden";
+            document.getElementById("gsformoneshark").className = "hidden";
+            document.getElementById("gsform2shark").className = "hidden";
+
+            document.getElementById("gstexbasket").className = "shown";
+            document.getElementById("gstexwaves").className = "shown";
+            document.getElementById("gstexporcelain").className = "shown";
+        }
+
+        else if(e.target.id === "gstexporcelain") {
+            texture='textures/porcelain.jpg';
+            //Changing the material of the mesh
+            changematerial(scene,texture,'base');
+        }
+
+        else if(e.target.id === "gstexbasket") {
+            texture='textures/basket.jpg';
+            //Changing the material of the mesh
+            changematerial(scene,texture,'base');
+        }
+
+        else if(e.target.id === "gstexwaves") {
+            texture='textures/waves.jpg';
+            //Changing the material of the mesh
+            changematerial(scene,texture,'base');
         }
     });
 
-    function init() {
-        scenewidth = 500;
-        sceneheight = 600;
-        camera = new THREE.PerspectiveCamera(45, scenewidth/sceneheight, 0.1, 1000 );
-        camera.position.x = 4;
-        camera.position.y = 4;
-        camera.position.z = 1;
+    function init(screenwidth) {
+
+            this.scene = null;
+            this.camera = null;
+            this.controls = null;
+
+        if (screenwidth > 480) {
+            scenewidth = 550;
+            sceneheight = 600;
+            camera = new THREE.PerspectiveCamera(45, scenewidth/sceneheight, 0.1, 1000 );
+            camera.position.x = 4.35;
+            camera.position.y = 1.5;
+            camera.position.z = 2;
+        }
+        else {
+            scenewidth = screenwidth;
+            sceneheight = scenewidth*1.09;
+            camera = new THREE.PerspectiveCamera(45, scenewidth/sceneheight, 0.1, 1000 );
+            camera.position.x = 3;
+            camera.position.y = 2;
+            camera.position.z = 1;
+        }
+        console.log("scenewidth: " + scenewidth);
+
 
         controls = new THREE.TrackballControls( camera );
 
@@ -108,27 +252,66 @@
 
         scene = new THREE.Scene();
 
-        renderer = new THREE.WebGLRenderer();
+        /*
+        hemisphereLight = new THREE.HemisphereLight( "rgb(255,255,255)", "rgb(0,0,0)", 1 );
+        scene.add( hemisphereLight );*/
+
+        // add subtle ambient lighting
+        var ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+
+        // directional lighting
+        var directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(2, 4, 0).normalize();
+        scene.add(directionalLight);
+        
+        renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setSize( scenewidth, sceneheight );
-        renderer.setClearColor(0xf5f5dc);
+        renderer.setClearColor( 0x000000, 0 );
 
         container = document.getElementById( 'container' );
         container.appendChild( renderer.domElement );
         loadScene('cupbase1');
+        changematerial(scene,texture,'base');
         render();
     }
 
-    function loadScene(model) {
-        model='models/'+model+'.dae';
-        console.log("Model: " + model);
+    function loadScene(model, part) {
+        var modelscene;
+        part = part || "base";
+        console.log("Part: " + part);
+        modeldae='models/'+model+'.dae';
+        console.log("Modeldae: " + modeldae);
         loader.load(
-                model,
+                modeldae,
                 // When model is loaded, call function
                 function ( collada ) {
-                    //colladascene = collada.scene;
-                    scene.add( collada.scene );
-                    hemisphereLight = new THREE.HemisphereLight( "rgb(172,223,250)", "rgb(141,135,131)", 0.5 );
-                    scene.add( hemisphereLight );
+                    console.log(collada);
+                    modelscene = collada.scene;
+                    modelscene.name = model;
+                    console.log("Modelscene name: " + modelscene.name);
+                    //modelscene.children[0].material = new THREE.MeshPhongMaterial({map:THREE.ImageUtils.loadTexture('textures/texporcelain.jpg')});
+                    scene.add( modelscene );
+                    //Checking if it is the base model that is being loaded or extras model
+                    //If it is extras model, use default material
+                    console.log("part variable: " + part);
+                    if (part === 'form1' || part==='form2') {
+                        texture = 'textures/porcelain.jpg';
+                    }
+                    var texture2 = THREE.ImageUtils.loadTexture(texture, undefined, function() {
+                        renderer.render(scene, camera);
+                    });
+                    material = new THREE.MeshPhongMaterial({map: texture2, color: "rgb(255,255,255)", ambient: "rgb(255,255,255)", specular: "rgb(255,255,255)",
+                        shininess: 5, shading: THREE.SmoothShading});
+
+                    var meshobject = scene.getObjectByName(model, true);
+                    console.log("Meshobject in loadscene: " + meshobject);
+
+                    //if (part === 'form1' || part==='form2') {
+                        meshobject.traverse( function ( child ) {
+                            child.material = material;
+                        });
+                    //}
                 },
                 // Function called when download progresses
                 function ( xhr ) {
@@ -137,26 +320,19 @@
         );
     }
 
-    function removeScene() {
-        //alert(window.refmodel.name);
+    function removeScene(model) {
 
-        //alert("Scene length: " + scene.children[1].children.length);
-        //console.log(scene.children[1].children);
-        /*
-        for (var i = 0; i<scene.children[1].children.length; i++) {
-            console.log("Child " + scene.children[1].children[i].name);
-        }
-        */
-        //scene.remove(scene.children[1].children[4].name);
-        //scene.remove(scene.children[1].name);
-        //alert("Scene child 2: " + scene.children[4].name);
         var i, sceneObj;
         for (i=scene.children.length-1; i>= 0; i--) {
             sceneObj=scene.children[i];
-            if ( sceneObj !== camera && sceneObj !== light) {
-                scene.remove(sceneObj);
+            console.log("SceneObj name: " + scene.children[i].name);
+            if(scene.children[i].name == model) {
+                scene.remove(scene.children[i]);
             }
         }
+
+        console.log("Model to remove: " + model);
+
         animate();
         render();
     }
@@ -171,8 +347,98 @@
         renderer.render(scene, camera);
     }
 
+    function changematerial(scenenode,texture,meshtochange) {
+        console.log("---------------------------------------------");
+        console.log("base name: " + modelbase);
+        console.log("form1 name: " + form1);
+        console.log("form2 name: " + form2);
+        console.log("current texture: " + texture);
 
 
+
+        var model;
+
+        if (meshtochange==='base') {
+            model=modelbase;
+            console.log("Mesh to change 1:" + meshtochange);
+        }
+        else if(meshtochange==='form1') {
+            model=form1;
+            console.log("Mesh to change 2:" + meshtochange);
+        }
+        else if(meshtochange==='form2') {
+            model=form2;
+            console.log("Mesh to change 3:" + meshtochange);
+        }
+
+        console.log("Selected model: " + model);
+        var texture2 = THREE.ImageUtils.loadTexture(texture, undefined, function() {
+            renderer.render(scene, camera);
+        });
+
+        texture2.needsupdate = true;
+
+        material = new THREE.MeshPhongMaterial({map: texture2, color: "rgb(255,255,255)", ambient: "rgb(255,255,255)", specular: "rgb(255,255,255)",
+            shininess: 5, shading: THREE.SmoothShading});
+
+
+
+        render();
+        var meshobject = scene.getObjectByName(model);
+        //Traverse through scene, write out object names
+        scene.traverse(function (object)
+        {
+            console.log("Object name: " + object.name);
+        });
+
+        //console.log("Meshobject: " + meshobject.name);
+
+        if (scene.getObjectByName(model)) {
+
+            console.log("Meshobject name: " + meshobject.name);
+            console.log("Meshobject material: " + meshobject.material);
+            console.log("The base object is in the scene.");
+            console.log(material);
+            //meshobject.children[0].children[0].material = material;
+            meshobject.traverse( function ( child ) {
+                child.material = material;
+                child.material.needsUpdate = true;
+            });
+            meshobject.material.needsUpdate = true;
+            console.log("Meshobject material: " + meshobject.material);
+        }
+        else {
+            console.log("Model not found.");
+        }
+
+        render();
+
+
+
+    }
+
+    //Checking for window resize
+    window.addEventListener('resize', function(event){
+        //Getting the window width
+        innerWidth = window.innerWidth;
+        if (innerWidth > 480) {
+            scenewidth = 550;
+            sceneheight = 600;
+        }
+        else {
+            scenewidth = 350;
+            sceneheight = 382;
+            controls.rotateSpeed = 2.0;
+        }
+        renderer.setSize( scenewidth, sceneheight );
+    });
+
+    var innerWidth = window.innerWidth;
+    window.onload =  init(innerWidth);
+
+
+    animate();
+    render();
 </script>
 
 </body>
