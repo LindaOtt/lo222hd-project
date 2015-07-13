@@ -51,7 +51,6 @@
 
 <script src="js/Detector.js"></script>
 <script>
-
     var scene="empty";
     var camera, controls, renderer, light;
     var scenewidth, sceneheight;
@@ -64,16 +63,11 @@
     var defaulttexture='textures/porcelain.jpg';
     var material;
     //model = 'models/cupbase1.dae';
-
     // instantiate a loader
     var loader = new THREE.ColladaLoader();
-
     loader.options.convertUpAxis = true;
     loader.options.upAxis = "X";
     loader.centerGeometry = true;
-
-
-
     var buttons = document.querySelector("#buttons");
     //btn.addEventListener("click", init('models/cupbase1.dae'));
     buttons.addEventListener("click", function(e) {
@@ -151,13 +145,12 @@
         }
         else if(e.target.id === "gsformoneshark") {
             //if (form1 != 'formoneshark') {
-                //removeScene(form1);
-                console.log("formoneshark");
-                form1 = 'formoneshark';
-                loadScene('formoneshark','form1');
-
-                changematerial(scene,defaulttexture,'form1');
-                render();
+            //removeScene(form1);
+            console.log("formoneshark");
+            form1 = 'formoneshark';
+            loadScene('formoneshark','form1');
+            changematerial(scene,defaulttexture,'form1');
+            render();
             //}
         }
         else if(e.target.id === "gsformtva") {
@@ -172,11 +165,11 @@
         }
         else if(e.target.id === "gsform2shark") {
             //if (form2 != 'form2shark') {
-                //removeScene(form2);
-                loadScene('form2shark','form2');
-                form2 = 'form2shark';
-                changematerial(scene,defaulttexture,'form2');
-                render();
+            //removeScene(form2);
+            loadScene('form2shark','form2');
+            form2 = 'form2shark';
+            changematerial(scene,defaulttexture,'form2');
+            render();
             //}
         }
         else if(e.target.id === "gscolor") {
@@ -189,37 +182,30 @@
             document.getElementById("gsformtva").className = "hidden";
             document.getElementById("gsformoneshark").className = "hidden";
             document.getElementById("gsform2shark").className = "hidden";
-
             document.getElementById("gstexbasket").className = "shown";
             document.getElementById("gstexwaves").className = "shown";
             document.getElementById("gstexporcelain").className = "shown";
         }
-
         else if(e.target.id === "gstexporcelain") {
             texture='textures/porcelain.jpg';
             //Changing the material of the mesh
             changematerial(scene,texture,'base');
         }
-
         else if(e.target.id === "gstexbasket") {
             texture='textures/basket.jpg';
             //Changing the material of the mesh
             changematerial(scene,texture,'base');
         }
-
         else if(e.target.id === "gstexwaves") {
             texture='textures/waves.jpg';
             //Changing the material of the mesh
             changematerial(scene,texture,'base');
         }
     });
-
     function init(screenwidth) {
-
-            this.scene = null;
-            this.camera = null;
-            this.controls = null;
-
+        this.scene = null;
+        this.camera = null;
+        this.controls = null;
         if (screenwidth > 480) {
             scenewidth = 550;
             sceneheight = 600;
@@ -237,10 +223,7 @@
             camera.position.z = 1;
         }
         console.log("scenewidth: " + scenewidth);
-
-
         controls = new THREE.TrackballControls( camera );
-
         controls.rotateSpeed = 5.0;
         controls.zoomSpeed = 1.2;
         controls.panSpeed = 1.2;
@@ -249,33 +232,27 @@
         controls.staticMoving = true;
         controls.dynamicDampingFactor = 0;
         controls.keys = [ 65, 83, 68 ];
-
         scene = new THREE.Scene();
-
         /*
-        hemisphereLight = new THREE.HemisphereLight( "rgb(255,255,255)", "rgb(0,0,0)", 1 );
-        scene.add( hemisphereLight );*/
-
+         hemisphereLight = new THREE.HemisphereLight( "rgb(255,255,255)", "rgb(0,0,0)", 1 );
+         scene.add( hemisphereLight );*/
         // add subtle ambient lighting
         var ambientLight = new THREE.AmbientLight(0x404040);
         scene.add(ambientLight);
-
         // directional lighting
         var directionalLight = new THREE.DirectionalLight(0xffffff);
         directionalLight.position.set(2, 4, 0).normalize();
         scene.add(directionalLight);
-        
+
         renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setSize( scenewidth, sceneheight );
         renderer.setClearColor( 0x000000, 0 );
-
         container = document.getElementById( 'container' );
         container.appendChild( renderer.domElement );
         loadScene('cupbase1');
         changematerial(scene,texture,'base');
         render();
     }
-
     function loadScene(model, part) {
         var modelscene;
         part = part || "base";
@@ -303,14 +280,12 @@
                     });
                     material = new THREE.MeshPhongMaterial({map: texture2, color: "rgb(255,255,255)", ambient: "rgb(255,255,255)", specular: "rgb(255,255,255)",
                         shininess: 5, shading: THREE.SmoothShading});
-
                     var meshobject = scene.getObjectByName(model, true);
                     console.log("Meshobject in loadscene: " + meshobject);
-
                     //if (part === 'form1' || part==='form2') {
-                        meshobject.traverse( function ( child ) {
-                            child.material = material;
-                        });
+                    meshobject.traverse( function ( child ) {
+                        child.material = material;
+                    });
                     //}
                 },
                 // Function called when download progresses
@@ -319,9 +294,7 @@
                 }
         );
     }
-
     function removeScene(model) {
-
         var i, sceneObj;
         for (i=scene.children.length-1; i>= 0; i--) {
             sceneObj=scene.children[i];
@@ -330,34 +303,25 @@
                 scene.remove(scene.children[i]);
             }
         }
-
         console.log("Model to remove: " + model);
-
         animate();
         render();
     }
-
     function animate() {
         requestAnimationFrame( animate );
         controls.update();
         renderer.render(scene, camera);
     }
-
     function render() {
         renderer.render(scene, camera);
     }
-
     function changematerial(scenenode,texture,meshtochange) {
         console.log("---------------------------------------------");
         console.log("base name: " + modelbase);
         console.log("form1 name: " + form1);
         console.log("form2 name: " + form2);
         console.log("current texture: " + texture);
-
-
-
         var model;
-
         if (meshtochange==='base') {
             model=modelbase;
             console.log("Mesh to change 1:" + meshtochange);
@@ -370,19 +334,13 @@
             model=form2;
             console.log("Mesh to change 3:" + meshtochange);
         }
-
         console.log("Selected model: " + model);
         var texture2 = THREE.ImageUtils.loadTexture(texture, undefined, function() {
             renderer.render(scene, camera);
         });
-
         texture2.needsupdate = true;
-
         material = new THREE.MeshPhongMaterial({map: texture2, color: "rgb(255,255,255)", ambient: "rgb(255,255,255)", specular: "rgb(255,255,255)",
             shininess: 5, shading: THREE.SmoothShading});
-
-
-
         render();
         var meshobject = scene.getObjectByName(model);
         //Traverse through scene, write out object names
@@ -390,11 +348,8 @@
         {
             console.log("Object name: " + object.name);
         });
-
         //console.log("Meshobject: " + meshobject.name);
-
         if (scene.getObjectByName(model)) {
-
             console.log("Meshobject name: " + meshobject.name);
             console.log("Meshobject material: " + meshobject.material);
             console.log("The base object is in the scene.");
@@ -410,13 +365,8 @@
         else {
             console.log("Model not found.");
         }
-
         render();
-
-
-
     }
-
     //Checking for window resize
     window.addEventListener('resize', function(event){
         //Getting the window width
@@ -432,11 +382,8 @@
         }
         renderer.setSize( scenewidth, sceneheight );
     });
-
     var innerWidth = window.innerWidth;
     window.onload =  init(innerWidth);
-
-
     animate();
     render();
 </script>

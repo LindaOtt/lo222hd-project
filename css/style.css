@@ -156,7 +156,6 @@ h1 {
 /* Mobile */
 @media only screen and (max-width: 480px) {
     body {
-
         background-color: #0b0b0b;
     }
 
@@ -173,6 +172,8 @@ h1 {
         background: url("../images/bg-mobil.jpg");
         background-repeat: no-repeat;
         width: 100%;
+        margin: 0;
+        padding: 0;
     }
 
     #buttons {
@@ -196,4 +197,8 @@ h1 {
         padding-left: 20px;
     }
 
+
+        background: url("../images/bg-mobil.png");
+        background-repeat: no-repeat;
+    }
 }
