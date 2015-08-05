@@ -2,6 +2,7 @@
 <head>
     <title>Coffee Cup Maker</title>
     <link href='http://fonts.googleapis.com/css?family=Homemade+Apple' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -12,33 +13,33 @@
     <div id="container"></div>
     <div id="buttons">
         <ul class="gs-main">
-            <li class="gsform-level-1"><a href="#"><img id="gsform" src="images/gs-form.png"></a>
-                <ul class="gsform-level-2">
-                    <li><a href="#"><img id="gsbas" class="hidden" src="images/gs-bas.png"></a>
-                        <ul class="gsform-level-3">
-                            <li><a href="#"><img id="gsbasform1" class="hidden" src="images/gs-bas-form1.png"></a></li>
-                            <li><a href="#"><img id="gsbasform2" class="hidden" src="images/gs-bas-form2.png"></a></li>
-                            <li><a href="#"><img id="gsbasform3" class="hidden" src="images/gs-bas-form3.png"></a></li>
+            <li class="gsform-level-1 hidden" id="gsform"><span class="navtext">Form</span>
+                <ul class="gsform-level-2" class="hidden">
+                    <li id="gsbas" class="hidden""><span class="navtext">Bas</span>
+                        <ul class="gsform-level-3 hidden">
+                            <li id="gsbasform1" class="hidden"><span class="navtext">Classic</span></li>
+                            <li id="gsbasform2" class="hidden"><span class="navtext">Cylinder</span></li>
+                            <li id="gsbasform3" class="hidden">Square</li>
                         </ul>
                     </li>
-                    <li><a href="#"><img id="gsformett" class="hidden" src="images/gs-formett.png"></a>
-                        <ul class="gsform-level-4">
-                            <li><a href="#"><img id="gsformoneshark" class="hidden" src="images/gs-form1-shark.png"></a></li>
+                    <li id="gsformett" class="hidden"><span class="navtext">Inside form</span></li>
+                        <ul class="gsform-level-4 hidden">
+                            <li id="gsformoneshark" class="hidden"><span class="navtext">Shark</span></li></li>
                         </ul>
                     </li>
-                    <li><a href="#"><img id="gsformtva" class="hidden" src="images/gs-formtva.png"></a>
-                        <ul class="gsform-level-5">
-                            <li><a href="#"><img id="gsform2shark" class="hidden" src="images/gs-form2-shark.png"></a></li>
+                    <li id="gsformtva" class="hidden"><span class="navtext">Handle</span></li>
+                        <ul class="gsform-level-5 hidden">
+                            <li id="gsform2shark" class="hidden"><span class="navtext">Shark</span></li></li>
                         </ul>
                     </li>
                 </ul>
             </li>
 
-            <li class="gscolor-level-1"><a href="#"><img id="gscolor" src="images/gs-color.png"></a>
-                <ul class="gsform-level-6">
-                    <li><a href="#"><img id="gstexporcelain" class="hidden" src="images/gs-tex-porcelain.png"></a></li>
-                    <li><a href="#"><img id="gstexbasket" class="hidden" src="images/gs-tex-basket.png"></a></li>
-                    <li><a href="#"><img id="gstexwaves" class="hidden" src="images/gs-tex-waves.png"></a></li>
+            <li class="gscolor-level-1 hidden" id="gscolor"><span class="navtext">Color</span>
+                <ul class="gsform-level-6 hidden">
+                    <li id="gstexporcelain" class="hidden"><span class="navtext">Porcelain</span></li></li>
+                    <li id="gstexbasket" class="hidden"><span class="navtext">Basket</span></li></li>
+                    <li id="gstexwaves" class="hidden">Waves</li>
 
                 </ul>
             </li>
@@ -73,24 +74,28 @@
     buttons.addEventListener("click", function(e) {
         e = e || event;
         if (e.target.id === "gsform") {
-            document.getElementById("gsbasform1").className = "hidden";
-            document.getElementById("gsbasform2").className = "hidden";
-            document.getElementById("gsbasform3").className = "hidden";
             document.getElementById("gsbas").className = "shown";
             document.getElementById("gsformett").className = "shown";
             document.getElementById("gsformtva").className = "shown";
             document.getElementById("gsformoneshark").className = "hidden";
             document.getElementById("gsform2shark").className = "hidden";
             document.getElementById("gscolor").className = "lowopacity";
+            document.querySelector('.gsform-level-6').className = "gsform-level-6 hidden";
+            document.querySelector('.gsform-level-3').className = "gsform-level-3 hidden";
             document.getElementById("gstexporcelain").className = "hidden";
             document.getElementById("gstexbasket").className = "hidden";
             document.getElementById("gstexwaves").className = "hidden";
+            document.getElementById("gsbasform1").className = "hidden";
+            document.getElementById("gsbasform2").className = "hidden";
+            document.getElementById("gsbasform3").className = "hidden";
         }
         if (e.target.id === "gsbas") {
             document.getElementById("gsbasform1").className = "shown";
             document.getElementById("gsbasform2").className = "shown";
             document.getElementById("gsbasform3").className = "shown";
-            document.getElementById("gsformoneshark").className = "hidden"
+            document.querySelector('.gsform-level-3').className = "gsform-level-3 shown";
+            document.getElementById("gsformoneshark").className = "hidden";
+            document.getElementById("gsbas").className = "highopacity";
             document.getElementById("gsformett").className = "lowopacity";
             document.getElementById("gsformtva").className = "lowopacity";
             document.getElementById("gstexporcelain").className = "hidden";
@@ -136,6 +141,7 @@
         else if(e.target.id === "gsformett") {
             document.getElementById("gsformett").className = "highopacity";
             document.getElementById("gsbas").className = "lowopacity";
+            document.querySelector('.gsform-level-3').className = "gsform-level-3 hidden";
             document.getElementById("gsformtva").className = "lowopacity";
             document.getElementById("gsform2shark").className = "hidden";
             document.getElementById("gsbasform1").className = "hidden";
@@ -175,6 +181,7 @@
         else if(e.target.id === "gscolor") {
             document.getElementById("gscolor").className = "highopacity";
             document.getElementById("gsbas").className = "hidden";
+            document.querySelector('.gsform-level-6').className = "gsform-level-6 shown";
             document.getElementById("gsbasform1").className = "hidden";
             document.getElementById("gsbasform2").className = "hidden";
             document.getElementById("gsbasform3").className = "hidden";

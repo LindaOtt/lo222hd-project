@@ -19,6 +19,7 @@ section {
     background-repeat: no-repeat;
 }
 
+
 .hidden {
     display: none;
 }
@@ -29,10 +30,12 @@ section {
 
 .highopacity {
     opacity: 1;
+    display: inline-block;
 }
 
 .lowopacity {
     opacity: 0.3;
+    display: inline-block;
 }
 
 #container {
@@ -58,34 +61,131 @@ section {
     padding-top: 5px;
 }
 
+.navtext {
+    display: none;
+}
+
+#gsbas {
+    background-image: url('../images/gs-bas.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gsform {
+    background-image: url('../images/gs-form.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gsformett {
+    background-image: url('../images/gs-formett.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gsformtva {
+    background-image: url('../images/gs-formtva.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gsbasform1 {
+    background-image: url('../images/gs-bas-form1.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gsbasform2 {
+    background-image: url('../images/gs-bas-form2.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gsbasform3 {
+    background-image: url('../images/gs-bas-form3.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gsformett {
+    background-image: url('../images/gs-formett.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gsformoneshark {
+    background-image: url('../images/gs-form1-shark.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gsform2shark {
+    background-image: url('../images/gs-form2-shark.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gscolor {
+    background-image: url('../images/gs-color.png');
+    background-repeat: no-repeat;
+    width: 106px;
+    height:106px;
+}
+
+#gstexporcelain {
+    background-image: url('../images/gs-tex-porcelain.png');
+    background-repeat: no-repeat;
+    width: 80px;
+    height:80px;
+}
+
+#gstexbasket {
+    background-image: url('../images/gs-tex-basket.png');
+    background-repeat: no-repeat;
+    width: 80px;
+    height:80px;
+}
+
+#gstexwaves {
+    background-image: url('../images/gs-tex-waves.png');
+    background-repeat: no-repeat;
+    width: 80px;
+    height:80px;
+}
+
 .gs-main {
     display: block;
     position: relative;
 }
 
 .gsform-level-1 {
-    position: absolute;
     top: 0;
-    display: block;
+    display: inline-block;
 }
 
 .gsform-level-2 {
     position: absolute;
     top: 120px;
-    display: block;
+    display: inline-block;
     clear: both;
     padding: 0;
     width: 350px;
 }
 
-.gsform-level-2 li {
-    display: inline-block;
-}
 
 .gsform-level-3 {
     position: absolute;
     top: 120px;
-    display: block;
     clear: both;
     padding: 0;
     width: 350px;
@@ -93,7 +193,7 @@ section {
 }
 
 .gsform-level-3 li {
-    display: inline;
+    display: inline-block;
     clear: none;
 }
 
@@ -128,7 +228,6 @@ section {
 .gsform-level-6 {
     position: absolute;
     top: 120px;
-    display: block;
     clear: both;
     padding: 0;
     width: 350px;
@@ -136,7 +235,7 @@ section {
 }
 
 .gsform-level-6 li {
-    display: inline;
+    display: inline-block;
     clear: none;
 }
 
@@ -177,12 +276,71 @@ h1 {
     }
 
     #buttons {
-        width: 400px;
-        display: inline-block;
+        width: 100%;
+        display: block;
         vertical-align: top;
         position: absolute;
-        right: 0
+        left: 0;
     }
+
+    .navtext {
+        display: block;
+    }
+
+    .gs-main {
+        top: 0;
+        left: 0;
+        padding: 0;
+    }
+
+    #gsbas,
+    #gsform,
+    #gsformett,
+    #gsformtva,
+    #gsbasform1,
+    #gsbasform2,
+    #gsbasform3,
+    #gsformett,
+    #gsformoneshark,
+    #gsform2shark,
+    #gscolor,
+    #gstexporcelain,
+    #gstexbasket,
+    #gstexwaves {
+        display: block;
+        font-family: Lato, sans-serif;
+        background: none;
+        padding: 15px;
+        border: 1px solid #3f352d;
+        background-color: #4e433a;
+        clear: both;
+        width: 100%;
+        height: 25px;
+        font-size: 20px;
+    }
+
+    .gsform-level-2 {
+        display: block;
+        position: relative;
+        margin: 0;
+        padding: 0;
+    }
+
+    .gscolor-level-1 {
+        display: block;
+        position: relative;
+        top: 0;
+        left: 0px;
+    }
+
+    .gsform-level-4, .gsform-level-5 {
+        padding: 0;
+        position: relative;
+        top:inherit;
+        width: inherit;
+    }
+
+
 }
 
 /* iPad */
