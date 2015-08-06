@@ -2,23 +2,47 @@ body {
     /*background: url("../images/bg.jpg");*/
     font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
     color: #ffffff;
+    margin: 0;
 }
 
-ul, li {
-    list-style-type: none;
-}
 
 section {
     width: 1013px;
     height: 1088px;
     margin-left: auto;
     margin-right: auto;
-    position: relative;
+    /*position: relative;*/
     overflow: auto;
     background: url("../images/bg-desktop.png");
     background-repeat: no-repeat;
 }
 
+ul,li {
+    list-style-type: none;
+    list-style-position:inside;
+    margin:0;
+    padding:0;
+}
+
+
+
+a {
+    display:inline;
+    float: left;
+    clear:both;
+    padding: 5px;
+    margin: 0;
+    color: white;
+    font-family: Lato, sans-serif;
+    background: none;
+    padding: 15px;
+    text-decoration: none;
+    border: 1px solid #3f352d;
+    background-color: #4e433a;
+    width: 100%;
+    height: 25px;
+    font-size: 20px;
+}
 
 .hidden {
     display: none;
@@ -27,6 +51,19 @@ section {
 .shown {
     display: inline-block;
 }
+
+a:hover {
+    background-color: #8c8074;
+}
+
+a:hover + .hidden, .hidden:hover {
+    display: block;
+}
+
+.hidden:hover > ul {
+    display: block;
+}
+
 
 .highopacity {
     opacity: 1;
@@ -48,199 +85,15 @@ section {
     display: inline-block;
 }
 
-#buttons {
-    width: 400px;
-    display: inline-block;
-    vertical-align: top;
-    position: absolute;
-    right: 0
-}
-
-#baseforms {
-    display: inline-block;
-    padding-top: 5px;
-}
 
 .navtext {
     display: none;
 }
 
-#gsbas {
-    background-image: url('../images/gs-bas.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
 
-#gsform {
-    background-image: url('../images/gs-form.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
-
-#gsformett {
-    background-image: url('../images/gs-formett.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
-
-#gsformtva {
-    background-image: url('../images/gs-formtva.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
-
-#gsbasform1 {
-    background-image: url('../images/gs-bas-form1.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
-
-#gsbasform2 {
-    background-image: url('../images/gs-bas-form2.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
-
-#gsbasform3 {
-    background-image: url('../images/gs-bas-form3.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
-
-#gsformett {
-    background-image: url('../images/gs-formett.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
-
-#gsformoneshark {
-    background-image: url('../images/gs-form1-shark.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
-
-#gsform2shark {
-    background-image: url('../images/gs-form2-shark.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
-
-#gscolor {
-    background-image: url('../images/gs-color.png');
-    background-repeat: no-repeat;
-    width: 106px;
-    height:106px;
-}
-
-#gstexporcelain {
-    background-image: url('../images/gs-tex-porcelain.png');
-    background-repeat: no-repeat;
-    width: 80px;
-    height:80px;
-}
-
-#gstexbasket {
-    background-image: url('../images/gs-tex-basket.png');
-    background-repeat: no-repeat;
-    width: 80px;
-    height:80px;
-}
-
-#gstexwaves {
-    background-image: url('../images/gs-tex-waves.png');
-    background-repeat: no-repeat;
-    width: 80px;
-    height:80px;
-}
-
-.gs-main {
-    display: block;
-    position: relative;
-}
-
-.gsform-level-1 {
-    top: 0;
-    display: inline-block;
-}
-
-.gsform-level-2 {
-    position: absolute;
-    top: 120px;
-    display: inline-block;
-    clear: both;
-    padding: 0;
-    width: 350px;
-}
-
-
-.gsform-level-3 {
-    position: absolute;
-    top: 120px;
-    clear: both;
-    padding: 0;
-    width: 350px;
-    padding: 5px;
-}
-
-.gsform-level-3 li {
-    display: inline-block;
-    clear: none;
-}
-
-.gscolor-level-1 {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 150px;
-}
-
-.gsform-level-4 {
-    position: absolute;
-    top: 120px;
-    display: block;
-    clear: both;
-    padding: 0;
-    width: 350px;
-    padding: 5px;
-}
-
-
-.gsform-level-5 {
-    position: absolute;
-    top: 120px;
-    display: block;
-    clear: both;
-    padding: 0;
-    width: 350px;
-    padding: 5px;
-}
-
-.gsform-level-6 {
-    position: absolute;
-    top: 120px;
-    clear: both;
-    padding: 0;
-    width: 350px;
-    padding: 5px;
-}
-
-.gsform-level-6 li {
-    display: inline-block;
-    clear: none;
-}
 
 canvas {
-    width: inherit;
+    width: initial;
     height: 100%;
 }
 
@@ -261,8 +114,8 @@ h1 {
     #container {
         width: 320px;
         margin: 0;
-        left:20px;
-        top: 200px;
+        left:0;
+        top: 150px;
         clear: none;
         display: inline-block;
     }
@@ -287,64 +140,38 @@ h1 {
         display: block;
     }
 
-    .gs-main {
-        top: 0;
-        left: 0;
-        padding: 0;
+    ul {
+        list-style-type:none;
+        margin:0;
+        padding:0;
+        position: static;
     }
 
-    #gsbas,
-    #gsform,
-    #gsformett,
-    #gsformtva,
-    #gsbasform1,
-    #gsbasform2,
-    #gsbasform3,
-    #gsformett,
-    #gsformoneshark,
-    #gsform2shark,
-    #gscolor,
-    #gstexporcelain,
-    #gstexbasket,
-    #gstexwaves {
-        display: block;
-        font-family: Lato, sans-serif;
-        background: none;
-        padding: 15px;
-        border: 1px solid #3f352d;
-        background-color: #4e433a;
-        clear: both;
+    ul li, li a {
         width: 100%;
-        height: 25px;
-        font-size: 20px;
     }
 
-    .gsform-level-2 {
-        display: block;
-        position: relative;
-        margin: 0;
-        padding: 0;
-    }
-
-    .gscolor-level-1 {
-        display: block;
-        position: relative;
-        top: 0;
-        left: 0px;
-    }
-
-    .gsform-level-4, .gsform-level-5 {
-        padding: 0;
-        position: relative;
-        top:inherit;
-        width: inherit;
-    }
 
 
 }
 
-/* iPad */
+/* iPad and over */
 @media only screen and (min-width : 481px) {
+
+    h1 {
+        float: left;
+        width: 300px;
+        left: initial;
+    }
+
+    #container {
+        position: relative;
+    }
+
+    #buttons {
+       float: right;
+        width: 400px;
+    }
 
     body {
         background-color: #0b0b0b;
@@ -356,7 +183,159 @@ h1 {
     }
 
 
-        background: url("../images/bg-mobil.png");
+    a {
+        font-family: 'Homemade Apple', cursive;
+        border: 1px solid blue;
+        color: #ffffff;
+        background-color: initial;
+        width: 106px;
+        height: 63px;
+        padding: 40px 0 5px 0;
+        vertical-align: middle;
+        background-repeat: no-repeat;
+        line-height: 20px;
+        margin: 0;
+    }
+
+    a:hover {
+        background-color: initial;
+    }
+
+    a:hover + .hidden, .hidden:hover {
+        display: none;
+    }
+
+    .hidden:hover > ul {
+        display: none;
+    }
+
+
+    a#gsbas {
+        background-image: url('../images/gs-bas.png');
+    }
+
+    a#gsform  {
+        background-image: url('../images/gs-form.png');
+    }
+
+    a#gsformett  {
+        background-image: url('../images/gs-formett.png');
+    }
+
+    a#gsformtva  {
+        background-image: url('../images/gs-formtva.png');
+    }
+
+    a#gsbasform1  {
+        background-image: url('../images/gs-bas-form1.png');
+    }
+
+    a#gsbasform2  {
+        background-image: url('../images/gs-bas-form2.png');
+    }
+
+    a#gsbasform3  {
+        background-image: url('../images/gs-bas-form3.png');
+    }
+
+    a#gsformett  {
+        background-image: url('../images/gs-formett.png');
+    }
+
+    a#gsformoneshark  {
+        background-image: url('../images/gs-form1-shark.png');
+    }
+
+    a#gsform2shark  {
+        background-image: url('../images/gs-form2-shark.png');
+    }
+
+    a#gscolor  {
+        background-image: url('../images/gs-color.png');
+    }
+
+    a#gstexporcelain,
+    a#gstexbasket,
+    a#gstexwaves {
         background-repeat: no-repeat;
     }
+
+    a#gstexporcelain {
+        background-image: url('../images/gs-tex-porcelain.png');
+    }
+
+    a#gstexbasket {
+        background-image: url('../images/gs-tex-basket.png');
+    }
+
+    a#gstexwaves {
+        background-image: url('../images/gs-tex-waves.png');
+    }
+
+    .gs-main {
+        display: block;
+        position: relative;
+    }
+
+    .gsform-level-1 {
+        top: 0;
+        display: inline-block;
+    }
+
+    .gsform-level-2 {
+        position: absolute;
+        top: 110px;
+    }
+
+
+    .gsform-level-3 {
+        position: absolute;
+        top: 0;
+        left: 106px;
+    }
+
+    .gsform-level-3 li {
+        display: inline-block;
+        clear: none;
+    }
+
+    .gscolor-level-1 {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 150px;
+    }
+
+    .gsform-level-4 {
+        top: 120px;
+        display: block;
+        clear: both;
+        padding: 0;
+        width: 350px;
+        padding: 5px;
+    }
+
+
+    .gsform-level-5 {
+        top: 120px;
+        display: block;
+        clear: both;
+        padding: 0;
+        width: 350px;
+        padding: 5px;
+    }
+
+    .gsform-level-6 {
+        top: 120px;
+        clear: both;
+        padding: 0;
+        width: 350px;
+        padding: 5px;
+    }
+
+    .gsform-level-6 li {
+        display: inline-block;
+        clear: none;
+    }
+
 }
