@@ -43,6 +43,8 @@ a {
     width: 100%;
     height: 25px;
     font-size: 20px;
+    text-shadow: 1px 1px 3px black;
+    word-wrap: break-word;
 }
 
 .hidden {
@@ -103,6 +105,7 @@ h1 {
     position: absolute;
     top: 0;
     left: 0;
+    text-shadow: 1px 1px 3px black;
 }
 
 
@@ -170,8 +173,9 @@ h1 {
     }
 
     #buttons {
-       float: right;
+        float: right;
         width: 400px;
+        margin-top: 10px;
     }
 
     body {
@@ -183,11 +187,15 @@ h1 {
         padding-left: 20px;
     }
 
+    ul, li {
+        width: initial;
+        float:left;
+    }
 
     a {
         font-family: 'Homemade Apple', cursive;
-        border: 1px solid blue;
         color: #ffffff;
+        border: initial;
         background-color: initial;
         width: 106px;
         height: 63px;
@@ -196,6 +204,7 @@ h1 {
         background-repeat: no-repeat;
         line-height: 20px;
         margin: 0;
+        text-align: center;
     }
 
     a:hover {
@@ -259,6 +268,10 @@ h1 {
     a#gstexbasket,
     a#gstexwaves {
         background-repeat: no-repeat;
+        width: 80px;
+        float: initial;
+        font-size: 18px;
+        padding-right: 2px;
     }
 
     a#gstexporcelain {
@@ -288,11 +301,9 @@ h1 {
         top: 110px;
     }
 
-
     .gsform-level-3 {
         position: absolute;
-        top: 0;
-        left: 106px;
+        top: 226px;
     }
 
     .gsform-level-3 li {
@@ -304,16 +315,13 @@ h1 {
         display: block;
         position: absolute;
         top: 0;
-        left: 150px;
+        left: 110px;
     }
 
     .gsform-level-4 {
         top: 120px;
-        display: block;
         clear: both;
         padding: 0;
-        width: 350px;
-        padding: 5px;
     }
 
 
@@ -322,8 +330,6 @@ h1 {
         display: block;
         clear: both;
         padding: 0;
-        width: 350px;
-        padding: 5px;
     }
 
     .gsform-level-6 {
